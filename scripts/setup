@@ -1,0 +1,18 @@
+#!/usr/bin/env sh
+
+GREEN='\033[0;32m'
+NC='\033[0m'
+
+echo "\n${GREEN}Creates env files for development and test${NC}\n"
+
+if [ ! -f .env ]; then
+  cp .env.template .env
+fi
+
+echo "${GREEN}Build web image${NC}\n"
+
+docker compose build --no-cache
+
+echo "\n${GREEN}Cleanup setups containers${NC}\n"
+
+docker compose down --remove-orphans
